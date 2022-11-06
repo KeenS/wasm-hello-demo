@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+    </head>
+    <body>
+        <script type="module">
+         const response = await fetch('log.wasm');
+         const bytes = await response.arrayBuffer();
+         // instanciateするときに"console"の"log"を渡す
+         const results = await WebAssembly.instantiate(bytes, {
+             "console": {
+                 "log": (i) => console.log(i)
+             }
+         });
+         results.instance.exports.printLog();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+    </head>
+    <body>
+        <script type="module">
+         const response = await fetch('sum.wasm');
+         const bytes = await response.arrayBuffer();
+         const results = await WebAssembly.instantiate(bytes, {});
+         console.log(results.instance.exports.sum(10));
+        </script>
+    </body>
+</html>
